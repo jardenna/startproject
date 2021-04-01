@@ -1,29 +1,27 @@
 const webpack = require('webpack');
 const path = require('path');
-
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const devMode = process.env.NODE_ENV !== 'production';
+const prodMode = process.env.NODE_ENV === 'production';
 
 let mode = 'development';
 let target = 'web';
-if (process.env.NODE_ENV === 'production') {
-   mode = 'production';
-   target = 'browserslist'; // to fix temporary hmr problem for scss
-
-}
 
 const plugins = [
    new CleanWebpackPlugin(),
-   new MiniCssExtractPlugin({ filename: devMode ? '[name].css' : '[name].[contenthash].css' }),
+   new MiniCssExtractPlugin({ filename: !prodMode ? '[name].css' : '[name].[contenthash].css' }),
    new HtmlWebpackPlugin({
       template: './src/index.html'
    })
 ];
 
-if (devMode) {
+if (prodMode) {
+   mode = 'production';
+   target = 'browserslist'; // to fix temporary hmr problem for scss
+
+} else {
    // only enable hot in development
    plugins.push(new webpack.HotModuleReplacementPlugin());
 }
@@ -68,11 +66,14 @@ module.exports = {
             test: /\.(png|jpe?g|gif|svg)$/i,
             type: 'asset'
          }
-
-
-
-
       ]
+   },
+
+   resolve: {
+      alias: {
+         Components: path.resolve(__dirname, 'src/js/components/')
+
+      }
    },
 
 

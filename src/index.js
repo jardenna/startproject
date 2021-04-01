@@ -1,6 +1,7 @@
 import './styles/index.scss';
 import { render } from 'react-dom';
-import App from './js/components/App';
+
+import App from 'Components/App';
 
 const wrapper = document.getElementById('root');
 render(

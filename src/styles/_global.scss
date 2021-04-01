@@ -1,20 +1,19 @@
-@use 'colors';
+@use 'common/colors';
+@use 'common/mixins';
+@use 'common/fonts';
+
 
 body {
    margin: 0;
-   background-color: #fff;
+   background-color: colors.$color-gray;
+   font-family: fonts.$font-primary;
 }
 
 main {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: flex-start;
-
-
+   @include mixins.flexbox();
 }
 
 h1 {
    font-size: 30px;
-   color: #000;
+   color: colors.$color-gray;
 }
