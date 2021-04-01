@@ -1,4 +1,11 @@
+const webpack = require('webpack');
+const path = require('path');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 let mode = 'development';
 let target = 'web';
@@ -8,18 +15,46 @@ if (process.env.NODE_ENV === 'production') {
 
 }
 
+const plugins = [
+   new CleanWebpackPlugin(),
+   new MiniCssExtractPlugin({ filename: devMode ? '[name].css' : '[name].[contenthash].css' }),
+   new HtmlWebpackPlugin({
+      template: './src/index.html'
+   })
+];
+
+if (devMode) {
+   // only enable hot in development
+   plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
+   entry: {
+      app: './src/index.js'
+   },
+   output: {
+      // output path is required for `clean-webpack-plugin`
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].[contenthash].js',
+      // this places all images processed in an image folder
+      assetModuleFilename: 'images/[hash][ext][query]'
+   },
    mode,
    module: {
       rules: [
          {
             test: /\.(s[ac]|c)ss$/i,
             use: [
-               MiniCssExtractPlugin.loader,
+               {
+                  loader: MiniCssExtractPlugin.loader,
+                  // This is required for asset imports in CSS, such as url()
+                  options: { publicPath: '' }
+               },
                'css-loader',
                'postcss-loader',
+               // according to the docs, sass-loader should be at the bottom, which
+               // loads it first to avoid prefixes in your sourcemaps and other issues.
                'sass-loader'
-
             ]
          },
          {
@@ -28,6 +63,10 @@ module.exports = {
             use: {
                loader: 'babel-loader'
             }
+         },
+         {
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            type: 'asset'
          }
 
 
@@ -36,20 +75,15 @@ module.exports = {
       ]
    },
 
-   plugins: [
 
-      new MiniCssExtractPlugin()
-
-   ],
-
+   plugins,
    target,
    devtool: 'source-map',
 
-   // required if using webpack-dev-server
+
    devServer: {
       contentBase: './dist',
       port: 4000,
-      open: true,
       hot: true
    }
 };

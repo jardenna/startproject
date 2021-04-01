@@ -2,7 +2,7 @@
 
 body {
    margin: 0;
-   background-color: colors.$color-primary;
+   background-color: #fff;
 }
 
 main {
@@ -11,7 +11,10 @@ main {
    align-items: center;
    justify-content: flex-start;
 
-   h1 {
-      font-size: 30px;
-   }
+
+}
+
+h1 {
+   font-size: 30px;
+   color: #000;
 }
