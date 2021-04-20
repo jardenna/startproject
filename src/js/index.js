@@ -1,7 +1,9 @@
-import './styles/index.scss';
+import '../scss/style.scss';
+import React from 'react';
 import { render } from 'react-dom';
 
-import App from 'Components/App';
+
+import App from './components/App';
 
 const wrapper = document.getElementById('root');
 render(
@@ -9,7 +11,11 @@ render(
    wrapper
 );
 
+//------------------------------------
+
 
 if (module && module.hot) {
    module.hot.accept();
 }
+
+

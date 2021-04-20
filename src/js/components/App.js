@@ -1,15 +1,9 @@
-import Reciepies from './Reciepies';
+import React from 'react';
+
 
 function App() {
    return (
-      <article>
-         <section className="hero" />
-         <main>
-            <h1>Hello</h1>
-            <Reciepies />
-         </main>
-      </article>
-
+      <div>helloh</div>
    );
 }
 

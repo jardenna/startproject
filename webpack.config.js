@@ -28,11 +28,11 @@ if (prodMode) {
 
 module.exports = {
    entry: {
-      app: './src/index.js'
+      app: './src/js/index.js'
    },
    output: {
       // output path is required for `clean-webpack-plugin`
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'public'),
       filename: '[name].[contenthash].js',
       // this places all images processed in an image folder
       assetModuleFilename: 'images/[hash][ext][query]'
@@ -83,7 +83,7 @@ module.exports = {
 
 
    devServer: {
-      contentBase: './dist',
+      contentBase: './public',
       port: 4000,
       hot: true
    }

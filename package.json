@@ -1,15 +1,13 @@
 {
   "name": "startproject",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build-dev": "webpack"
-  
   },
-  "author": "",
+  "author": "Helle J Bjørnum",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.13.10",
@@ -41,7 +39,9 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  }
+  },
+  "description": "This is an assigment for Peakon"
 }
