@@ -14,7 +14,6 @@ const plugins = [
    new MiniCssExtractPlugin({ filename: !prodMode ? '[name].css' : '[name].[contenthash].css' }),
    new HtmlWebpackPlugin({
       template: './src/index.html',
-      title: 'start-project',
       favicon: './public/favicon.ico'
    })
 ];
