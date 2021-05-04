@@ -22,10 +22,7 @@ h2 {
 }
 
 a {
-
   color: $color-primary-link;
-
-
 
   &:focus {
     outline: var(--focus);
@@ -36,8 +33,6 @@ a {
     text-decoration: none;
   }
 }
-
-
 
 
 .container {
@@ -53,15 +48,9 @@ a {
 
 }
 
-
-
-
-
 .not-found-container {
   padding: 20px;
 }
-
-
 
 .sr-only {
   border: 0;
