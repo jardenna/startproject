@@ -13,7 +13,9 @@ const plugins = [
    new CleanWebpackPlugin(),
    new MiniCssExtractPlugin({ filename: !prodMode ? '[name].css' : '[name].[contenthash].css' }),
    new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      title: 'start-project',
+      favicon: './public/favicon.ico'
    })
 ];
 
@@ -32,7 +34,7 @@ module.exports = {
    },
    output: {
       // output path is required for `clean-webpack-plugin`
-      path: path.resolve(__dirname, 'public'),
+      path: path.resolve(__dirname, 'dist'),
       filename: '[name].[contenthash].js',
       // this places all images processed in an image folder
       assetModuleFilename: 'images/[hash][ext][query]'
@@ -83,7 +85,7 @@ module.exports = {
 
 
    devServer: {
-      contentBase: './public',
+      contentBase: './dist',
       port: 4000,
       hot: true
    }
