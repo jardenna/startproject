@@ -27,7 +27,6 @@ form {
     }
   }
 
-
 }
 
 .form-footer {
@@ -60,12 +59,12 @@ textarea {
   background: none;
   background-color: $color-white;
   margin: 25px 0;
-  color: $color-gray-darker;
-  outline: none;
-  font-family: $font-primary;
+  color: $color-primary;
+
+  font-size: 15px;
 
   &:focus {
-    background-color: $color-gray-lighter;
+    border-bottom: 1px solid $color-black;
   }
 }
 

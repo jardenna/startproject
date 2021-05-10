@@ -1,9 +1,9 @@
-import React from 'react';
-
 
 function App() {
    return (
-      <div>hello</div>
+      <main className="container">
+         hello
+      </main>
    );
 }
 
