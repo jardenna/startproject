@@ -1,9 +1,18 @@
 
+import MovieState from '../state/MovieContext/MovieState';
+import Movies from './Movies/Movies';
+
 function App() {
+
    return (
-      <main className="container">
-         hello
-      </main>
+      <MovieState>
+
+         <main className="container">
+            <Movies />
+         </main>
+
+      </MovieState>
+
    );
 }
 

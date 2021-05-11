@@ -1,0 +1,9 @@
+export const FETCH_POSTS = 'FETCH_POSTS';
+export const GET_SHOWS = 'GET_SHOWS';
+export const GET_EPISODES = 'GET_EPISODES';
+export const SEARCH_SHOWS = 'SEARCH_SHOWS';
+export const GET_CAST = 'GET_CAST';
+export const SET_NOT_FOUND = 'SET_NOT_FOUND';
+export const REMOVE_NOT_FOUND = 'REMOVE_NOT_FOUND';
+export const SET_ERROR = 'SET_ERROR';
+export const SET_LOADING = 'SET_LOADING';
