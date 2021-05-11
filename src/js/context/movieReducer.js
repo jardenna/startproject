@@ -1,4 +1,4 @@
-import { IS_LOADING, FETCH_SUCCESS, FETCH_ERROR } from './types';
+import { IS_LOADING, FETCH_SUCCESS, FETCH_CAST, FETCH_ERROR } from './types';
 
 const movieReducer = (state, action) => {
 
@@ -12,6 +12,12 @@ const movieReducer = (state, action) => {
          return {
             ...state,
             shows: action.payload,
+            isLoading: false
+         };
+      case FETCH_CAST:
+         return {
+            ...state,
+            cast: action.payload,
             isLoading: false
          };
       case FETCH_ERROR:

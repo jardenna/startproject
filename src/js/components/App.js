@@ -7,7 +7,10 @@ import Movies from './Movies';
 function App() {
    return (
       <MovieState>
-         <Movies />
+         <main className="container">
+            <Movies />
+         </main>
+
       </MovieState>
    );
 }

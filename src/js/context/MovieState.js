@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { IS_LOADING, FETCH_SUCCESS, FETCH_ERROR } from './types';
+import { IS_LOADING, FETCH_SUCCESS, FETCH_CAST, FETCH_ERROR } from './types';
 import movieReducer from './movieReducer';
 import MovieContext from './MovieContext';
 
@@ -18,6 +18,7 @@ const MovieState = (props) => {
    const initialState = {
       isLoading: false,
       shows: [],
+      cast: [],
       hasError: ''
    };
 
@@ -36,11 +37,29 @@ const MovieState = (props) => {
          dispatch({ type: FETCH_ERROR, payload: err.message });
       }
    };
+
+   const setCast = async (id) => {
+      loading();
+      try {
+         const url = `${MOVIEAPIS.shows}/${id}/cast`;
+         const data = await fetch(url);
+         const cast = await data.json();
+         dispatch({ type: FETCH_CAST, payload: cast });
+      } catch (err) {
+         dispatch({ type: FETCH_ERROR, payload: err.message });
+      }
+
+   };
+
+   const { shows } = state;
    const value = {
-      shows: state.shows,
+      shows,
+      cast: state.cast,
       loading: state.isLoading,
       error: state.hasError,
-      setMovies
+      setMovies,
+      setCast
+
 
    };
    return (
