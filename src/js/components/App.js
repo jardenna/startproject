@@ -1,9 +1,14 @@
 import React from 'react';
 
+import MovieState from '../context/MovieState';
+import Movies from './Movies';
+
 
 function App() {
    return (
-      <div>hello</div>
+      <MovieState>
+         <Movies />
+      </MovieState>
    );
 }
 
