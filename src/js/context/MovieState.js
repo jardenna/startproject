@@ -27,7 +27,6 @@ const MovieState = (props) => {
    const loading = () => dispatch({ type: IS_LOADING });
    const error = () => dispatch({ type: FETCH_ERROR });
 
-
    const setMovies = async () => {
       loading();
       try {
@@ -56,7 +55,6 @@ const MovieState = (props) => {
       loading();
       try {
          const url = `${MOVIEAPIS.searchShows}${searchTerm}`;
-
          const data = await fetch(url);
          const showsFound = await data.json();
          dispatch({ type: SEARCH_SHOWS, payload: showsFound });

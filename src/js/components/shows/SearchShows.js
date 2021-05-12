@@ -18,8 +18,6 @@ const SearchShows = () => {
       setValue(e.target.value);
    };
 
-   console.log(result.search);
-
    return (
       <form onSubmit={(e) => onSubmit(e, value)}>
          <input type="text" value={value} onChange={handleInput} />
