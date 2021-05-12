@@ -1,17 +1,16 @@
 import { useReducer } from 'react';
-import { IS_LOADING, FETCH_SUCCESS, FETCH_CAST, FETCH_ERROR } from './types';
+import { IS_LOADING, FETCH_SUCCESS, FETCH_CAST, SEARCH_SHOWS, FETCH_ERROR } from './types';
 import movieReducer from './movieReducer';
 import MovieContext from './MovieContext';
 
 const MAIN_API = 'https://api.tvmaze.com/';
 const MOVIEAPIS = {
    shows: `${MAIN_API}shows`,
-   searchShows: `${MAIN_API}/search/shows?=`,
+   searchShows: `${MAIN_API}search/shows?q=`,
    episodes: `${MAIN_API}seasons/`
 
 };
 
-//Cast https://api.tvmaze.com/shows/1/cast
 
 const MovieState = (props) => {
 
@@ -19,12 +18,14 @@ const MovieState = (props) => {
       isLoading: false,
       shows: [],
       cast: [],
+      search: [],
       hasError: ''
    };
 
 
    const [state, dispatch] = useReducer(movieReducer, initialState);
    const loading = () => dispatch({ type: IS_LOADING });
+   const error = () => dispatch({ type: FETCH_ERROR });
 
 
    const setMovies = async () => {
@@ -34,7 +35,7 @@ const MovieState = (props) => {
          const shows = await data.json();
          dispatch({ type: FETCH_SUCCESS, payload: shows });
       } catch (err) {
-         dispatch({ type: FETCH_ERROR, payload: err.message });
+         error(err.message);
       }
    };
 
@@ -51,16 +52,29 @@ const MovieState = (props) => {
 
    };
 
-   const { shows } = state;
+   const setSearch = async (searchTerm) => {
+      loading();
+      try {
+         const url = `${MOVIEAPIS.searchShows}${searchTerm}`;
+
+         const data = await fetch(url);
+         const showsFound = await data.json();
+         dispatch({ type: SEARCH_SHOWS, payload: showsFound });
+      } catch (err) {
+         error(err.message);
+      }
+   };
+
+   const { shows, search, cast } = state;
    const value = {
       shows,
-      cast: state.cast,
+      search,
+      cast,
       loading: state.isLoading,
       error: state.hasError,
       setMovies,
-      setCast
-
-
+      setCast,
+      setSearch
    };
    return (
       <MovieContext.Provider value={value}>
